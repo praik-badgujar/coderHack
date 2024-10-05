@@ -42,11 +42,11 @@ public class UserController {
     }
 	
 	@PutMapping("/{userId}")
-    public ResponseEntity<User> updateUserScore(@PathVariable("userId") String userId, @RequestBody int score) {
-        if (score < 0 || score > 100) {
+    public ResponseEntity<User> updateUserScore(@PathVariable("userId") String userId, @RequestBody User user) {
+        if (user.getScore() < 0 || user.getScore() > 100) {
             return ResponseEntity.badRequest().build();
         }
-        User updatedUser = userService.updateUserScore(userId, score);
+        User updatedUser = userService.updateUserScore(userId, user.getScore());
         return ResponseEntity.ok(updatedUser);
     }
 	
